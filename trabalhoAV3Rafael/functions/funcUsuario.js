@@ -1,6 +1,6 @@
 const conexao = require('../db.js');
 
-const selectSimples = () => {
+const selectSimples = async () => {
     conexao.query('SELECT * FROM usuario', (erro, linhas) => {
         if (erro) {
             console.error('Erro ao executar a consulta:', erro);
@@ -15,8 +15,22 @@ const selectSimples = () => {
 const updateSimples = () => {
 };
 
-const insertSimples = () => {
+const insertSimples = async (nome, email, senha, dataNascimento, genero, dataCriacao) => {
+    conexao.query({
+        sql: "INSERT INTO Usuario (Nome, Email, Senha, DataDeNascimento, Genero, DataCriacao) VALUES (?,?,?,?,?,?)",
+        values: [nome,email,senha, dataNascimento, genero, dataCriacao]
+    })
 };
+
+// (
+//     IDUsuario INT AUTO_INCREMENT PRIMARY KEY,
+//     Nome VARCHAR(100) NOT NULL,
+//     Email VARCHAR(100) NOT NULL UNIQUE,
+//     Senha VARCHAR(100) NOT NULL,
+//     DataDeNascimento DATE,
+//     Genero VARCHAR(10),
+//     DataCriacao DATETIME NOT NULL
+// );
 
 const deleteSimples = () => {
 };
