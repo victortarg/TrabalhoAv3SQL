@@ -18,7 +18,6 @@ CREATE TABLE Postagem
     IDUsuario INT,
     Conteudo TEXT NOT NULL,
     DataHoraPostagem DATETIME NOT NULL,
-    Curtidas INT DEFAULT 0,
     FOREIGN KEY (IDUsuario) REFERENCES Usuario(IDUsuario)
 );
 
