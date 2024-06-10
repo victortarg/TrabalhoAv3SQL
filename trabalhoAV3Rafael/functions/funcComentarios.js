@@ -12,13 +12,27 @@ const selectSimples = () => {
     });
 };
 
-const updateSimples = () => {
+const updateSimples = async (colunaAlt, infoAlt, colunaWhere, infoWhere) => {
+    conexao.query(`UPDATE comentario set ${colunaAlt} = ${infoAlt} WHERE ${colunaWhere} = ${infoWhere}`, (erro, result) => {
+        if(erro) {
+            console.log("erro ao fazer update", erro)
+            return;
+        }
+        console.log('Mudança', result);
+    })
 };
 
 const insertSimples = () => {
 };
 
-const deleteSimples = () => {
+const deleteSimples = async (colunaDel, infoDel) => {
+    conexao.query(`DELETE FROM comentario WHERE ${colunaDel} = ${infoDel};`, (erro, resultado) => {
+        if (erro) {
+            console.error('Erro ao executar o delete:', erro);
+            return;
+        }
+        console.log('Linhas afetadas:', resultado.affectedRows);
+    });
 };
 
 module.exports.selectSimples = selectSimples;

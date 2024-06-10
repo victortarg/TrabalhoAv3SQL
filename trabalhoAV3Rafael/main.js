@@ -7,7 +7,17 @@ const TbMembroGrupo = require('./functions/funcMemGrupo.js')
 const TbMensagem = require('./functions/funcMensagem.js')
 const TbPostagem = require('./functions/funcPostagem.js')
 const TbUsuario = require('./functions/funcUsuario.js')
+// Terceira questão
+//item 1
+TbPostagem.selectSimples('IDUsuario', 1);
 
+//item 2
+TbMensagem.updateSimples('Conteudo', '"Mensagem de Victor para Guilherme"', 'IDMensagem', 1);
+
+//item 3
+TbCurtida.deleteSimples('IDCurtida', 10);
+
+//item 4
 function gerarSenha() {
     const numeroAleatorio = Math.random().toFixed(5)
     return Math.floor(parseFloat(numeroAleatorio) * 100_000)
