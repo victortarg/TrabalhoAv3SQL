@@ -1,0 +1,28 @@
+-- 1 Projete o nome de todos os usuários  SQL e Algebra reacional
+select nome 
+from usuario;
+-- π Nome(usuario)
+
+-- 2 Projete o nome de todos os usuários com nome igual a Pedro
+SELECT Nome 
+FROM usuario 
+WHERE Nome LIKE '%Pedro%';
+-- π(Nome)(σ(Nome LIKE '%Pedro%')(usuario))
+
+-- 3 Projete o nome do usuário e a quantidade de grupos em que ele faz parte ordenado de forma crescente
+select u.nome, count(mg.idgrupo) as qtdgrupos
+from usuario u
+inner join membrogrupo mg on u.IDUsuario = mg.IDUsuario
+group by u.nome
+order by qtdgrupos asc;
+
+-- 4 Faça um sql que mostre qual usuário enviou a maior quantidade de mensagens.
+SELECT u.Nome, COUNT(m.IDUsuarioRemetente) AS qtdmsg
+FROM usuario u
+INNER JOIN mensagem m ON u.IDUsuario = M.IDUsuarioRemetente
+GROUP BY u.Nome
+ORDER BY qtdmsg DESC
+LIMIT 1;
+
+
+
