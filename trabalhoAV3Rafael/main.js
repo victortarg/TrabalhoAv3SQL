@@ -42,4 +42,5 @@ for (let i = 0; i < 10_000; i++) {
     catch(err => console.log(err))
 }
 
+
 db.end();

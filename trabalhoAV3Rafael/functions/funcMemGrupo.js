@@ -1,15 +1,27 @@
 const conexao = require('../db.js');
 
-const selectSimples = () => {
-    conexao.query('SELECT * FROM membrogrupo', (erro, linhas) => {
-        if (erro) {
-            console.error('Erro ao executar a consulta:', erro);
-            return;
-        }
-        linhas.forEach(linha => {
-            console.log(`IDMembroGrupo: ${linha.IDMembroGrupo} IDGrupo: ${linha.IDGrupo} IDUsuario: ${linha.IDUsuario} DataEntrada: ${linha.DataEntrada} DataSaida: ${linha.DataSaida}`);
+const selectSimples = async (coluna, info) => {
+    if (coluna != null && info != null) {
+        conexao.query(`SELECT * FROM membrogrupo WHERE ${coluna} = ${info}`, (erro, linhas) => {
+            if (erro) {
+                console.error('Erro ao executar a consulta:', erro);
+                return;
+            }
+            linhas.forEach(linha => {
+                console.log(`IDMembroGrupo: ${linha.IDMembroGrupo} IDGrupo: ${linha.IDGrupo} IDUsuario: ${linha.IDUsuario} DataEntrada: ${linha.DataEntrada} DataSaida: ${linha.DataSaida}`);
+            });
         });
-    });
+    } else if (coluna == null || info == null){
+        conexao.query('SELECT * FROM membrogrupo', (erro, linhas) => {
+            if (erro) {
+                console.error('Erro ao executar a consulta:', erro);
+                return;
+            }
+            linhas.forEach(linha => {
+                console.log(`IDMembroGrupo: ${linha.IDMembroGrupo} IDGrupo: ${linha.IDGrupo} IDUsuario: ${linha.IDUsuario} DataEntrada: ${linha.DataEntrada} DataSaida: ${linha.DataSaida}`);
+            });
+        });
+    };
 };
 
 const updateSimples = async (colunaAlt, infoAlt, colunaWhere, infoWhere) => {

@@ -1,15 +1,27 @@
 const conexao = require('../db.js');
 
-const selectSimples = () => {
-    conexao.query('SELECT * FROM mensagem', (erro, linhas) => {
-        if (erro) {
-            console.error('Erro ao executar a consulta:', erro);
-            return;
-        }
-        linhas.forEach(linha => {
-            console.log(`IDMensagem: ${linha.IDMensagem} IDUsuarioRemetente: ${linha.IDUsuarioRemetente} IDUsuarioDestinatario: ${linha.IDUsuarioDestinatario} Conteudo: ${linha.Conteudo} DataHoraMensagem: ${linha.DataHoraMensagem}`);
+const selectSimples = async (coluna, info) => {
+    if (coluna != null && info != null) {
+        conexao.query(`SELECT * FROM mensagem WHERE ${coluna} = ${info}`, (erro, linhas) => {
+            if (erro) {
+                console.error('Erro ao executar a consulta:', erro);
+                return;
+            }
+            linhas.forEach(linha => {
+                console.log(`IDMensagem: ${linha.IDMensagem} IDUsuarioRemetente: ${linha.IDUsuarioRemetente} IDUsuarioDestinatario: ${linha.IDUsuarioDestinatario} Conteudo: ${linha.Conteudo} DataHoraMensagem: ${linha.DataHoraMensagem}`);
+            });
         });
-    });
+    } else if (coluna == null || info == null){
+        conexao.query('SELECT * FROM mensagem', (erro, linhas) => {
+            if (erro) {
+                console.error('Erro ao executar a consulta:', erro);
+                return;
+            }
+            linhas.forEach(linha => {
+                console.log(`IDMensagem: ${linha.IDMensagem} IDUsuarioRemetente: ${linha.IDUsuarioRemetente} IDUsuarioDestinatario: ${linha.IDUsuarioDestinatario} Conteudo: ${linha.Conteudo} DataHoraMensagem: ${linha.DataHoraMensagem}`);
+            });
+        });
+    }
 };
 
 const updateSimples = async (colunaAlt, infoAlt, colunaWhere, infoWhere) => {

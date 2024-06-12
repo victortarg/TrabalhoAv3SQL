@@ -1,15 +1,27 @@
 const conexao = require('../db.js');
 
-const selectSimples = () => {
-    conexao.query('SELECT * FROM comentarios', (erro, linhas) => {
-        if (erro) {
-            console.error('Erro ao executar a consulta:', erro);
-            return;
-        }
-        linhas.forEach(linha => {
-            console.log(`IDComentario: ${linha.IDComentario} IDPostagem: ${linha.IDPostagem} IDUsuario: ${linha.IDUsuario} Conteudo: ${linha.Conteudo} DataHoraComentario: ${linha.DataHoraComentario}`);
+const selectSimples = async (coluna, info) => {
+    if (coluna != null && info != null) {
+        conexao.query(`SELECT * FROM comentarios WHERE ${coluna} = ${info}`, (erro, linhas) => {
+            if (erro) {
+                console.error('Erro ao executar a consulta:', erro);
+                return;
+            }
+            linhas.forEach(linha => {
+                console.log(`IDComentario: ${linha.IDComentario} IDPostagem: ${linha.IDPostagem} IDUsuario: ${linha.IDUsuario} Conteudo: ${linha.Conteudo} DataHoraComentario: ${linha.DataHoraComentario}`);
+            });
         });
-    });
+    } else if (coluna == null || info == null){
+        conexao.query('SELECT * FROM comentarios', (erro, linhas) => {
+            if (erro) {
+                console.error('Erro ao executar a consulta:', erro);
+                return;
+            }
+            linhas.forEach(linha => {
+                console.log(`IDComentario: ${linha.IDComentario} IDPostagem: ${linha.IDPostagem} IDUsuario: ${linha.IDUsuario} Conteudo: ${linha.Conteudo} DataHoraComentario: ${linha.DataHoraComentario}`);
+            });
+        });
+    };
 };
 
 const updateSimples = async (colunaAlt, infoAlt, colunaWhere, infoWhere) => {

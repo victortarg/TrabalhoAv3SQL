@@ -1,17 +1,28 @@
 const conexao = require('../db.js');
 
-const selectSimples = () => {
-    conexao.query('SELECT * FROM grupo', (erro, linhas) => {
-        if (erro) {
-            console.error('Erro ao executar a consulta:', erro);
-            return;
-        }
-        linhas.forEach(linha => {
-            console.log(`IDGrupo: ${linha.IDGrupo} NomeGrupo: ${linha.NomeGrupo} Descricao: ${linha.Descricao} DataCriacao: ${linha.DataCriacao}`);
+const selectSimples = async (coluna, info) => {
+    if (coluna != null && info != null) {
+        conexao.query(`SELECT * FROM grupo WHERE ${coluna} = ${info}`, (erro, linhas) => {
+            if (erro) {
+                console.error('Erro ao executar a consulta:', erro);
+                return;
+            }
+            linhas.forEach(linha => {
+                console.log(`IDGrupo: ${linha.IDGrupo} NomeGrupo: ${linha.NomeGrupo} Descricao: ${linha.Descricao} DataCriacao: ${linha.DataCriacao}`);
+            });
         });
-    });
+    } else if (coluna == null || info == null){
+        conexao.query('SELECT * FROM grupo', (erro, linhas) => {
+            if (erro) {
+                console.error('Erro ao executar a consulta:', erro);
+                return;
+            }
+            linhas.forEach(linha => {
+                console.log(`IDGrupo: ${linha.IDGrupo} NomeGrupo: ${linha.NomeGrupo} Descricao: ${linha.Descricao} DataCriacao: ${linha.DataCriacao}`);
+            });
+        });
+    };
 };
-
 
 const updateSimples = async (colunaAlt, infoAlt, colunaWhere, infoWhere) => {
     conexao.query(`UPDATE grupo set ${colunaAlt} = ${infoAlt} WHERE ${colunaWhere} = ${infoWhere}`, (erro, result) => {

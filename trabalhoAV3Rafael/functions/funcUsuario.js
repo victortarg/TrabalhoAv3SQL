@@ -21,7 +21,7 @@ const selectSimples = async (coluna, info) => {
                 console.log(`IDUsuario: ${linha.IDUsuario} Nome: ${linha.Nome} Email: ${linha.Email} Senha: ${linha.Senha} DataDeNascimento: ${linha.DataDeNascimento} Genero: ${linha.Genero} DataCriacao: ${linha.DataCriacao}`);
             });
         });
-    }
+    };
 };
 
 const updateSimples = async (colunaAlt, infoAlt, colunaWhere, infoWhere) => {
