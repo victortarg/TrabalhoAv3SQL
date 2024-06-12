@@ -22,7 +22,11 @@ const updateSimples = async (colunaAlt, infoAlt, colunaWhere, infoWhere) => {
     })
 };
 
-const insertSimples = () => {
+const insertSimples = async (idPostagem, idUsuario, conteudo, dataHoraComentario) => {
+    conexao.query({
+        sql: "INSERT INTO comentario (IDPostagem, IDUsuario, Conteudo, DataHoraComentario) VALUES (?,?,?,?)",
+        values: [idPostagem, idUsuario, conteudo, dataHoraComentario]
+    })
 };
 
 const deleteSimples = async (colunaDel, infoDel) => {

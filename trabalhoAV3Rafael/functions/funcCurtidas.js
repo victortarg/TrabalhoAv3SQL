@@ -22,7 +22,11 @@ const updateSimples = async (colunaAlt, infoAlt, colunaWhere, infoWhere) => {
     })
 };
 
-const insertSimples = () => {
+const insertSimples = async (idUsuario, idPostagem, dataHoraLike) => {
+    conexao.query({
+        sql: "INSERT INTO curtida (IDUsuario, IDPostagem, DataHoraLike) VALUES (?,?,?)",
+        values: [idUsuario, idPostagem, dataHoraLike]
+    })
 };
 
 const deleteSimples = async (colunaDel, infoDel) => {
